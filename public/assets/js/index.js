@@ -1,6 +1,9 @@
 let noteTitle;
 let noteText;
 let saveNoteBtn;
+
+let deleteNoteBtn;
+
 let newNoteBtn;
 let noteList;
 
@@ -8,6 +11,9 @@ if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
+  
+  deleteNoteBtn = document.querySelector('.delete-note');
+
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 
@@ -82,19 +88,20 @@ const handleNoteSave = () => {
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
-  e.stopPropagation();
+  console.log("delete activated")
+  // e.stopPropagation();
 
-  const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  // const note = e.target;
+  // const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
-  if (activeNote.id === noteId) {
-    activeNote = {};
-  }
+  // if (activeNote.id === noteId) {
+  //   activeNote = {};
+  // }
 
-  deleteNote(noteId).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  // deleteNote(noteId).then(() => {
+  //   getAndRenderNotes();
+  //   renderActiveNote();
+  // });
 };
 
 // Sets the activeNote and displays it
@@ -177,6 +184,9 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
+  
+  deleteNoteBtn.addEventListener('click', handleNoteDelete);
+  
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
