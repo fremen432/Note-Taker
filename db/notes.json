@@ -14,6 +14,11 @@
       "title": "This is a new note",
       "text": "hey",
       "id": "2"
+    },
+    {
+      "title": "Groceries",
+      "text": "- apples\n- oranges\n- strawberries",
+      "id": "3"
     }
   ]
 }

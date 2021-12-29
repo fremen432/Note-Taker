@@ -1,8 +1,20 @@
+// const { notesArray } = require('../../db/notes');
+
+// const { notesArr } = require('../../../db/notes')
+const router = require('express').Router();
+
+// const { notesArray } = require('../../../db/notes');
+const { notesArray } = require('../../../db/notes');
+
+const cl = (input) => console.log(input);
+// cl(notesArray);
+
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 
-let deleteNoteBtn;
+let delBtn;
 
 let newNoteBtn;
 let noteList;
@@ -12,7 +24,7 @@ if (window.location.pathname === '/notes') {
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
   
-  deleteNoteBtn = document.querySelector('.delete-note');
+  delBtn = document.querySelector('.delete-note');
 
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
@@ -50,13 +62,28 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
-const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+const deleteNote = (id) => {
+
+  cl(id)
+//   fetch(`/notes/${id}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+// })
+
+
+
+cl("deleteNote function complete")
+};
+
+// const deleteNote = (id) =>
+//   fetch(`/notes`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -88,20 +115,26 @@ const handleNoteSave = () => {
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
-  console.log("delete activated")
-  // e.stopPropagation();
 
-  // const note = e.target;
-  // const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+      // cl("delete activated");
 
-  // if (activeNote.id === noteId) {
-  //   activeNote = {};
-  // }
+  e.stopPropagation();
 
-  // deleteNote(noteId).then(() => {
-  //   getAndRenderNotes();
-  //   renderActiveNote();
-  // });
+  const note = e.target;
+  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+
+      // cl(note);
+      // cl(noteId);
+
+  if (activeNote.id === noteId) {
+    activeNote = {};
+    cl(activeNote)
+  }
+
+  deleteNote(noteId).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
 };
 
 // Sets the activeNote and displays it
@@ -179,17 +212,24 @@ const renderNoteList = async (notes) => {
   }
 };
 
+const messageWorks = () => console.log("this works!")
+
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
+
   saveNoteBtn.addEventListener('click', handleNoteSave);
-  
-  deleteNoteBtn.addEventListener('click', handleNoteDelete);
-  
+  // saveNoteBtn.addEventListener('click', messageWorks);
+
+  // delBtn.addEventListener('hover', hover);
+  // delBtn.onclick = hover;
+
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+
+  // delBtn.addEventListener('click', deleteNote);
 }
 
 getAndRenderNotes();

@@ -6,7 +6,7 @@ const {
     filterByQuery, 
     findById, 
     createNewNote, 
-    // deleteNote,
+    deleteById,
     validateNote 
 } = require('../../lib/notes');
 const { notesArray } = require('../../db/notes');
@@ -31,16 +31,25 @@ router.get('/notes/:id', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-
+    
     // console.log(notes.length);
-//   set id based on what the next index of the array will be
-  req.body.id = notesArray.length.toString();
+    //   set id based on what the next index of the array will be
+    req.body.id = notesArray.length.toString();
+    
+    if (!validateNote(req.body)) {
+        res.status(400).send('The note is not properly formatted.');
+    } else {
+        const note = createNewNote(req.body, notesArray);
+        res.json(note);
+    }
+});
 
-  if (!validateNote(req.body)) {
-    res.status(400).send('The note is not properly formatted.');
+router.delete('/notes/:id', (req, res) => {
+  const result = deleteById(req.params.id, notesArray);
+  if (result) {
+    res.json(result);
   } else {
-    const note = createNewNote(req.body, notesArray);
-    res.json(note);
+    res.send(404);
   }
 });
 
