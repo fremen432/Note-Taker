@@ -61,20 +61,29 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
-const deleteNote = (id) => {
+// const deleteNote = (id) => {
 
-  cl(id)
-//   fetch(`/api/notes/${id}`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-// })
+//   cl(id)
+// //   fetch(`/api/notes/${id}`, {
+// //     method: 'DELETE',
+// //     headers: {
+// //       'Content-Type': 'application/json',
+// //     },
+// // })
 
 
 
-cl("deleteNote function complete")
-};
+// cl("deleteNote function complete")
+// };
+
+const deleteNote = (id) =>
+  fetch(`/api/notes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
 
 // const deleteNote = (id) =>
 //   fetch(`/api/notes`, {

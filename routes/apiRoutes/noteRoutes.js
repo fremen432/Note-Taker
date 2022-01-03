@@ -60,6 +60,7 @@ router.delete("/notes/:id", (req, res) => {
   //passing in the id and the notes array
 
   // deleteNote(req.params.id, notesArray);
+  console.log("router.delete works")
   deleteNote(req.params.id, notes);
   
   //return the updated note list
