@@ -3,7 +3,6 @@ const cl = (input) => console.log(input);
 let noteTitle;
 let noteText;
 let saveNoteBtn;
-let delBtn;
 let newNoteBtn;
 let noteList;
 
@@ -11,7 +10,6 @@ if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
-  delBtn = document.querySelector('.delete-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 }
@@ -31,7 +29,7 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+});
 
 const saveNote = (note) =>
   fetch('/api/notes', {
@@ -40,7 +38,7 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
+});
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -48,7 +46,7 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+});
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -175,17 +173,7 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
-// const handleNoteSaveNew = () => handleNoteSave().then()
-
-
-
 if (window.location.pathname === '/notes') {
-
-  // saveNoteBtn.addEventListener('click', handleNoteSave);
-  // newNoteBtn.addEventListener('click', handleNewNoteView);
-  // noteTitle.addEventListener('keyup', handleRenderSaveBtn);
-  // noteText.addEventListener('keyup', handleRenderSaveBtn);
-
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
