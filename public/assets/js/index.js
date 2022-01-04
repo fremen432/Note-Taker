@@ -88,7 +88,7 @@ const handleNoteDelete = (e) => {
 
   if (activeNote.id === noteId) {
     activeNote = {};
-    cl(activeNote);
+    // cl(activeNote);
   }
 
   deleteNote(noteId).then(() => {
@@ -159,9 +159,12 @@ const renderNoteList = async (notes) => {
   }
 
   jsonNotes.forEach((note) => {
+
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
+
     noteListItems.push(li);
+    // console.log(noteListItems);
   });
 
   if (window.location.pathname === '/notes') {
@@ -169,12 +172,19 @@ const renderNoteList = async (notes) => {
   }
 };
 
-const messageWorks = () => console.log("this works!")
-
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
+// const handleNoteSaveNew = () => handleNoteSave().then()
+
+
+
 if (window.location.pathname === '/notes') {
+
+  // saveNoteBtn.addEventListener('click', handleNoteSave);
+  // newNoteBtn.addEventListener('click', handleNewNoteView);
+  // noteTitle.addEventListener('keyup', handleRenderSaveBtn);
+  // noteText.addEventListener('keyup', handleRenderSaveBtn);
 
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
