@@ -1,5 +1,3 @@
-const cl = (input) => console.log(input);
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -14,10 +12,8 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// Show an element
+// Show or hide an element
 const show = (elem) => { elem.style.display = 'inline' };
-
-// Hide an element
 const hide = (elem) => { elem.style.display = 'none' };
 
 // activeNote is used to keep track of the note in the textarea
@@ -78,17 +74,13 @@ const handleNoteSave = () => {
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
-
   e.stopPropagation();
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
-
   if (activeNote.id === noteId) {
     activeNote = {};
-    // cl(activeNote);
   }
-
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -122,7 +114,6 @@ const renderNoteList = async (notes) => {
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
-
   let noteListItems = [];
 
   // Returns HTML element with or without a delete button
@@ -157,12 +148,10 @@ const renderNoteList = async (notes) => {
   }
 
   jsonNotes.forEach((note) => {
-
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
 
     noteListItems.push(li);
-    // console.log(noteListItems);
   });
 
   if (window.location.pathname === '/notes') {
