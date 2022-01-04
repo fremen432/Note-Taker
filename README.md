@@ -3,7 +3,7 @@
 ## [Live page](https://cbm-note-taker.herokuapp.com/)
 
 ## Challenge Description:
-* Create an note-taking application that can be used to write and save notes.
+* Create a note-taking application that can be used to write and save notes.
 * Use Express.js for the back end.
 * Save and retrieve note data from a JSON file.
 * Deploy final application to Heroku.com.
