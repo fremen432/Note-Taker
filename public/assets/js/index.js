@@ -1,20 +1,9 @@
-// const { notesArray } = require('../../db/notes');
-
-// const { notesArr } = require('../../../db/notes')
-
-// const { notesArray } = require('../../../db/notes');
-// const { notesArray } = require('../../../db/notes');
-// const { notesArray } = require();
-
 const cl = (input) => console.log(input);
-// cl(notesArray);
 
 let noteTitle;
 let noteText;
 let saveNoteBtn;
-
 let delBtn;
-
 let newNoteBtn;
 let noteList;
 
@@ -22,24 +11,16 @@ if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
-  
   delBtn = document.querySelector('.delete-note');
-
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
-
-  
 }
 
 // Show an element
-const show = (elem) => {
-  elem.style.display = 'inline';
-};
+const show = (elem) => { elem.style.display = 'inline' };
 
 // Hide an element
-const hide = (elem) => {
-  elem.style.display = 'none';
-};
+const hide = (elem) => { elem.style.display = 'none' };
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
@@ -61,21 +42,6 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
-// const deleteNote = (id) => {
-
-//   cl(id)
-// //   fetch(`/api/notes/${id}`, {
-// //     method: 'DELETE',
-// //     headers: {
-// //       'Content-Type': 'application/json',
-// //     },
-// // })
-
-
-
-// cl("deleteNote function complete")
-// };
-
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -83,15 +49,6 @@ const deleteNote = (id) =>
       'Content-Type': 'application/json',
     },
   });
-
-
-// const deleteNote = (id) =>
-//   fetch(`/api/notes`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -124,19 +81,14 @@ const handleNoteSave = () => {
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
 
-      // cl("delete activated");
-
   e.stopPropagation();
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
-      // cl(note);
-      // cl(noteId);
-
   if (activeNote.id === noteId) {
     activeNote = {};
-    cl(activeNote)
+    cl(activeNote);
   }
 
   deleteNote(noteId).then(() => {
@@ -199,9 +151,7 @@ const renderNoteList = async (notes) => {
       delBtnEl.addEventListener('click', handleNoteDelete);
 
       liEl.append(delBtnEl);
-    }
-
-    return liEl;
+    } return liEl;
   };
 
   if (jsonNotes.length === 0) {
@@ -211,7 +161,6 @@ const renderNoteList = async (notes) => {
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-
     noteListItems.push(li);
   });
 
@@ -228,16 +177,9 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 if (window.location.pathname === '/notes') {
 
   saveNoteBtn.addEventListener('click', handleNoteSave);
-  // saveNoteBtn.addEventListener('click', messageWorks);
-
-  // delBtn.addEventListener('hover', hover);
-  // delBtn.onclick = hover;
-
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
-
-  // delBtn.addEventListener('click', deleteNote);
 }
 
 getAndRenderNotes();

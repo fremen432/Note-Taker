@@ -3,7 +3,6 @@
 
 const router = require('express').Router();
 const { 
-    // filterByQuery, 
     findById, 
     createNewNote, 
     deleteNote,
@@ -14,7 +13,7 @@ const notes = require('../../db/notes.json');
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 
-// Takes in data from data/notes.json and 'filterByQuery' function from lib/notes.json. 
+// Takes in data from data/notes.json and 'filterByQuery' function from lib/notes.json.
 // Then calls the function when there is a query to GET all notes at the '/notes' route.
 router.get('/notes', (req, res) => {
 
